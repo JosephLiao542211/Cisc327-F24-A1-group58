@@ -109,9 +109,12 @@
 .search-box {
   display: flex;
   margin-top: 20px;
+  align-items: center;
+  border-radius: 30px;
 }
 
 .input {
+  margin-top: 20px;
   padding: 15px;
   border-radius: 30px;
   border: none;
@@ -137,24 +140,100 @@
   align-items: center;
   justify-content: center;
   background-color: #ff6600;
-  padding: 20px;
+  padding: 30px;
   border-radius: 20px;
   width: 300px;
+  height: 325px;
   position: relative;
 }
 
-.flight-info {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  color: #001f3f;
-  font-size: 1rem;
+/* Flight Search Box */
+.flight-search-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
 }
 
-.flight-info label {
+.flight-search-box {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 275px;
+  height: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.search-field {
+  margin-bottom: 20px;
+}
+
+.search-field label {
   display: block;
+  font-size: 0.9rem;
+  color: #666;
   margin-bottom: 5px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+}
+
+input {
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  margin-right: 10px;
+}
+
+.date-fields {
+  display: flex;
+  justify-content: center;
+  padding-right: 10px;
+  gap: 25px;
+}
+
+.date-field {
+  width: 35%;
+}
+
+.date-field label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.date-field input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+}
+
+.search-button {
+  background-color: #ff6600;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #e65c00;
 }
 
 .airplane-image {
