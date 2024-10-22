@@ -27,13 +27,34 @@ const App = () => {
         </div>
 
         <div className="right-column">
-          <div className="flight-info">
-            <label>From: Luxor (LUX)</label>
-            <label>To: Cairo (CAP)</label>
-            <label>Departure: Mar 23/2023</label>
-            <label>Return: Mar 27/2023</label>
-            <button className="search-button">Search</button>
-          </div>
+        <section className="flight-search-section">
+            <div className="flight-search-box">
+                <div className="search-field">
+                    <label>From::</label>
+                    <div className="input-group">
+                    <input type="text" value="Luxor (LUX)"/>
+                    </div>
+                </div>
+
+                <div className="search-field">
+                    <label>To::</label>
+                    <input type="text" value="Cairo (CAP)"/>
+                </div>
+
+                <div className="date-fields">
+                    <div className="date-field">
+                    <label>Departure</label>
+                    <input type="text" value="Mar 23/2023"/>
+                    </div>
+                    <div className="date-field">
+                    <label>Return</label>
+                    <input type="text" value="Mar 27/2023"/>
+                    </div>
+                </div>
+
+                <button className="search-button">Search</button>
+            </div>
+        </section>
           <img src="airplane.png" className="airplane-image" alt="Airplane" />
         </div>
       </section>
