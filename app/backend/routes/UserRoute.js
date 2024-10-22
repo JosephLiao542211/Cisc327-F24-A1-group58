@@ -3,7 +3,8 @@ const router = express.Router();
 const User = require('../models/User'); // Make sure the path is correct
 
 // Route to fetch all users
-router.get('/users', async (req, res) => {
+router.get('/user', async (req, res) => {
+    res.send('Welcome to USER API!')
     try {
         const users = await User.find(); // Fetch all users from MongoDB
         res.status(200).json(users); // Respond with the user data

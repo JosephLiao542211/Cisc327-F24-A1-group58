@@ -2,6 +2,7 @@
 require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/UserRoute');
 const cors = require('cors');
 const User = require('./models/User'); // Your Mongoose model
 
@@ -20,10 +21,13 @@ mongoose
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch((error) => console.error('Error connecting to MongoDB:', error));
 
+app.use('/api', userRoutes);
+
 // Route for user registration
 app.get('/', (req, res) => {
     res.send('Welcome to the User Registration API!');
 });
+
 app.post('/register', async (req, res) => {
     try {
         const { firstName, lastName, phoneNumber, email, password } = req.body;
