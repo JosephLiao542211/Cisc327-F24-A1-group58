@@ -1,0 +1,107 @@
+.login-button button {
+    background-color: #f0f0f0; /* Light grey background */
+    color: #666; /* Dark grey text */
+    border: 1px solid #ccc; /* Light grey border */
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #e0e0e0; /* Slightly darker grey on hover */
+}
+
+.names {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adjust the gap as needed */
+}
+
+.sign-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FC8A06;
+    color: white;
+    border: none;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.sign-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.sign-button:hover:not(:disabled) {
+    background-color: #ce7510;
+}
+
+.grey-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #b9b9b9; /* Grey background */
+    color: white;
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.grey-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.grey-button:hover:not(:disabled) {
+    background-color: #696969; /* Darker grey on hover */
+}
+
+.terms-container {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    margin-bottom: 3%;
+    color: #333; /* Dark grey text */
+}
+
+.terms-container input {
+    margin-right: 10px;
+    flex-shrink: 1;
+    max-width: min-content;
+}
+
+.terms-container p {
+    margin: 0;
+}
+
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus {
+    border-color: #FC8A06; /* Orange border on focus */
+    outline: none;
+}
+input[type="text"]:focus {
+    border-color: #FC8A06; /* Orange border on focus */
+    outline: none;
+}
+input[type="password"]:focus {
+    border-color: #FC8A06; /* Orange border on focus */
+    outline: none;
+}

@@ -23,18 +23,29 @@
 
 .flight-card-overlay {
     position: absolute;
+    border-top-right-radius: 10%;
     bottom: 0;
+    backdrop-filter: blur(5px);
     left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    width: 50%;
+    background: rgba(0, 0, 0, 0.2);
     color: white;
     padding: 10px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 1.2rem;
     box-sizing: border-box;
     transition: background 0.3s ease;
 }
 
 .flight-card-overlay p {
     margin: 5px 0;
+}
+.flight-card-overlay h1 {
+    margin: 5px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.2;
 }
 
 .flight-card:hover .flight-card-overlay {

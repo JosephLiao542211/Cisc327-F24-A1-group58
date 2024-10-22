@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../App.css';
+import './signup.css';
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -44,8 +44,14 @@ function SignUp() {
 
     return (
         <div className="App">
-            <h1>User Registration</h1>
+            <img src="logo.png" alt="Logo" style={{ marginBottom: '0px', height: '60px' }} />
+            <div className='text-container'>
+                <h2>Register</h2>
+                <p><strong>Book your flight now</strong> to lock in the best rates! Enjoy a smooth and convenient travel experience as you head to your destination. <strong>Don't wait—reserve your seat today!</strong></p>
+            </div>
+                
             <form onSubmit={handleSubmit}>
+                <div className='names'>
                 <input
                     type="text"
                     name="firstName"
@@ -62,6 +68,8 @@ function SignUp() {
                     onChange={handleChange}
                     required
                 />
+                </div>
+                
                 <input
                     type="text"
                     name="phoneNumber"
@@ -86,8 +94,19 @@ function SignUp() {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit">Register</button>
-                <button onClick={handleLogin}>Login</button>
+                <div className='terms-container'> 
+                <input
+                    type="checkbox"
+                    required
+                    style={{ marginRight: '10px' }}
+                    onChange={(e) => setFormData({ ...formData, termsAccepted: e.target.checked })}
+                />
+                <p>I agree to all terms and conditions</p>
+                </div>
+            
+                <button className="sign-button" type="submit" disabled={!formData.termsAccepted}>Register</button>
+                
+                <button className="grey-button" onClick={handleLogin}>Login</button>
             </form>
         </div>
     );
