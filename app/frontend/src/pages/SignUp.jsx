@@ -17,9 +17,13 @@ function SignUp() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const handleLogin = (e) => {
+        navigate('/login'); // Redirect to login page
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:5000/register', {
+        const response = await fetch('http://localhost:5000/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,9 +31,12 @@ function SignUp() {
             body: JSON.stringify(formData),
         });
         const data = await response.json();
-        if (data.success) {
+        console.log(data);
+        if (data.message === 'User registered successfully!') {
+            
             alert(data.message);
-            navigate('/login'); // Redirect to login page on successful registration
+            navigate('/login'); 
+            // Redirect to login page on successful registration
         } else {
             alert(data.message);
         }
@@ -80,6 +87,7 @@ function SignUp() {
                     required
                 />
                 <button type="submit">Register</button>
+                <button onClick={handleLogin}>Login</button>
             </form>
         </div>
     );

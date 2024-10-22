@@ -28,23 +28,24 @@ router.get('/users/:id', async (req, res) => {
 
 // Route to create a new user
 router.post('/users', async (req, res) => {
-    const { name } = req.body; // Extract name from the request body
-
-    if (!name) {
-        return res.status(400).json({ error: 'Name is required' }); // Check if name is provided
-    }
-
-    const newUser = new User({
-        name: name, // Create a new user with the provided name
-    });
-
+    
     try {
-        const savedUser = await newUser.save(); // Save the new user in MongoDB
-        res.status(201).json(savedUser); // Respond with the saved user
+        const { firstName, lastName, phoneNumber, email, password } = req.body;
+        const newUser = new User({
+            firstName,
+            lastName,
+            phoneNumber,
+            email,
+            password, // Remember to hash this password in a real app!
+        });
+
+        await newUser.save();
+        res.status(201).json({ message: 'User registered successfully!' });
     } catch (error) {
-        res.status(500).json({ error: 'Error creating user' });
+        res.status(400).json({ message: 'Error registering user', error });
     }
 });
+
 
 // Route to delete a user by ID
 router.delete('/users/:id', async (req, res) => {
@@ -56,6 +57,35 @@ router.delete('/users/:id', async (req, res) => {
         res.status(200).json({ message: 'User deleted successfully' }); // Respond with a success message
     } catch (error) {
         res.status(500).json({ error: 'Error deleting user' });
+    }
+});
+// Route to login a user
+router.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email }); // Find user by email
+
+        if (!user) {
+            return res.status(404).json({ error: 'Invalid Email (Please register)' });
+        }
+
+        const isMatch = user.password === password; // Compare password as plain strings
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Invalid Password' });
+        }
+
+        // Assuming you have a method to generate a token
+        // const token = user.generateAuthToken();
+        // // Method to generate an auth token
+        // UserSchema.methods.generateAuthToken = function() {
+        //     const token = jwt.sign({ _id: this._id, email: this.email }, 'your_jwt_secret_key', { expiresIn: '1h' });
+        //     return token;
+        // };
+
+        res.status(200).json({ message: 'Login successful' });
+    } catch (error) {
+        console.error('Login error:', error); // Log the error details
+        res.status(500).json({ error: 'An unexpected error occurred while logging in. Please try again later.' });
     }
 });
 

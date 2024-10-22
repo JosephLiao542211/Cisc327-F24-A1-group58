@@ -1,7 +1,28 @@
-import React from 'react';
-import '../App.css'; // Import the CSS file
 
-const App = () => {
+import '../App.css'; // Import the CSS file
+import FlightCard from '../components/FlightCard/FlightCard';
+
+import React, { useEffect, useState } from 'react';
+
+  
+
+
+const Landing = ({ token }) => {
+  const [flights, setFlights] = useState([]);
+
+  useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        const response = await fetch('/flight');
+        const data = await response.json();
+        setFlights(data);
+      } catch (error) {
+        console.error('Error fetching flights:', error);
+      }
+    };
+
+    fetchFlights();
+  }, []);
   return (
     <div className="container">
       <header className="header">
@@ -27,34 +48,34 @@ const App = () => {
         </div>
 
         <div className="right-column">
-        <section className="flight-search-section">
+          <section className="flight-search-section">
             <div className="flight-search-box">
-                <div className="search-field">
-                    <label>From::</label>
-                    <div className="input-group">
-                    <input type="text" value="Luxor (LUX)"/>
-                    </div>
+              <div className="search-field">
+                <label>From:</label>
+                <div className="input-group">
+                  <input type="text" value="Luxor (LUX)" />
                 </div>
+              </div>
 
-                <div className="search-field">
-                    <label>To::</label>
-                    <input type="text" value="Cairo (CAP)"/>
+              <div className="search-field">
+                <label>To:</label>
+                <input type="text" value="Cairo (CAP)" />
+              </div>
+
+              <div className="date-fields">
+                <div className="date-field">
+                  <label>Departure</label>
+                  <input type="text" value="Mar 23/2023" />
                 </div>
-
-                <div className="date-fields">
-                    <div className="date-field">
-                    <label>Departure</label>
-                    <input type="text" value="Mar 23/2023"/>
-                    </div>
-                    <div className="date-field">
-                    <label>Return</label>
-                    <input type="text" value="Mar 27/2023"/>
-                    </div>
+                <div className="date-field">
+                  <label>Return</label>
+                  <input type="text" value="Mar 27/2023" />
                 </div>
+              </div>
 
-                <button className="search-button">Search</button>
+              <button className="search-button">Search</button>
             </div>
-        </section>
+          </section>
           <img src="airplane.png" className="airplane-image" alt="Airplane" />
         </div>
       </section>
@@ -70,14 +91,7 @@ const App = () => {
         </div>
 
         <div className="deal-cards">
-          <div className="deal-card">
-            <img src="tokyo.jpg" alt="Tokyo, Japan" className="card-image" />
-            <div className="card-text">
-              <h3>Tokyo, Japan</h3>
-              <p>Sept 11th</p>
-            </div>
-            <div className="discount">-40%</div>
-          </div>
+          <FlightCard id={1} />
 
           <div className="deal-card">
             <img src="rome.jpg" alt="Rome, Italy" className="card-image" />
@@ -98,6 +112,16 @@ const App = () => {
           </div>
         </div>
 
+        <div className="deal-cards">
+          {flights.length > 0 ? (
+            flights.map((flight) => (
+              <FlightCard key={flight.id} id={flight.id} />
+            ))
+          ) : (
+            <div style={{ width: '100px', height: '100px', backgroundColor: 'purple' }}></div>
+          )}
+        </div>
+
         <button className="explore-button">Explore More</button>
       </section>
 
@@ -111,9 +135,10 @@ const App = () => {
           </div>
         </div>
         <p className="footer-text">© 2024 Airplane LLC, All rights reserved.</p>
+        <p className="footer-text">{token || 'generic'}</p>
       </footer>
     </div>
   );
 };
 
-export default App;
+export default Landing;
