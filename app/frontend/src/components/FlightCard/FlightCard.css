@@ -53,3 +53,24 @@
 }
 
 
+
+.discount-overlay {
+    position: absolute;
+    border-bottom-left-radius: 10%;
+    top: 0;
+    backdrop-filter: blur(5px);
+    right: 0;
+    width: 20%;
+    background:#FC8A06;
+    color: white;
+    padding: 10px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    transition: background 0.3s ease;
+}
+
+.discount-overlay h1 {
+    margin: 5px 0;
+}
