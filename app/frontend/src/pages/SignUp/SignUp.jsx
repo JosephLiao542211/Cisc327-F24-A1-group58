@@ -43,7 +43,7 @@ function SignUp() {
     };
 
     return (
-        <div className="App">
+        <div className="signup-body">
             <img src="logo.png" alt="Logo" style={{ marginBottom: '0px', height: '60px' }} />
             <div className='text-container'>
                 <h2>Register</h2>

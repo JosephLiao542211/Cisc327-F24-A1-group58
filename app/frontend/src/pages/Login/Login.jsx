@@ -40,7 +40,7 @@ const Login = () => {
     };
 
     return (
-        <>
+        <div className='login-body'>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <img src="logo.png" alt="Logo" style={{ marginBottom: '0px', height: '60px' }} />
             <div className='text-container'>
@@ -79,7 +79,7 @@ const Login = () => {
                     </button>
                 </form>
             </div>
-        </>
+        </div>
     );
 };
 

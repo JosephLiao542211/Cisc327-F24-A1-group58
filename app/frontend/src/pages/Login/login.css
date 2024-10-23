@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 
-body {
+.login-body {
     margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -11,6 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
 }
 
 form {
@@ -36,8 +37,9 @@ label {
     color: #555;
 }
 
-input[type="email"],input[type="text"],
-input[type="password"] {
+form.login-form input[type="email"], 
+form.login-form input[type="text"], 
+form.login-form input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
