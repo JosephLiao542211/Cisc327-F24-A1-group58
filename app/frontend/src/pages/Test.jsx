@@ -52,7 +52,7 @@ const Test = () => {
   return (
     <div className="App">
       <h1>User Management</h1>
-      
+
       {/* Display Error */}
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
@@ -61,7 +61,7 @@ const Test = () => {
       <ul>
         {users.map(user => (
           <li key={user._id}>
-            {user.name} 
+            {user.name}
             <button onClick={() => fetchUserById(user._id)}>View</button>
             <button onClick={() => deleteUser(user._id)}>Delete</button>
           </li>
@@ -70,11 +70,11 @@ const Test = () => {
 
       {/* Create User */}
       <h2>Create User</h2>
-      <input 
-        type="text" 
+      <input
+        type="text"
         value={newUserName}
-        onChange={(e) => setNewUserName(e.target.value)} 
-        placeholder="Enter user name" 
+        onChange={(e) => setNewUserName(e.target.value)}
+        placeholder="Enter user name"
       />
       <button onClick={createUser}>Add User</button>
 
