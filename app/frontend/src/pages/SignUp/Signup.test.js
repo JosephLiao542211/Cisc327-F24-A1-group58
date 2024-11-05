@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 global.fetch = jest.fn();
 
-beforeEach(() => {
+beforeAll(() => {
     fetch.mockClear();
 });
 
