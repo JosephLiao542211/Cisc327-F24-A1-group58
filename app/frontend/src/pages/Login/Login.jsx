@@ -8,6 +8,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
+ 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true); // Start loading
@@ -27,7 +29,7 @@ const Login = () => {
             if (data.message === 'Login successful') {
                 alert(data.message);
                 localStorage.setItem('token', data.token); // Store token
-                navigate('/'); // Redirect to home page
+                navigate(`/${data.userId}`); // Redirect to user-specific home page
             } else {
                 alert(data.error || 'Login failed. Please try again.');
             }

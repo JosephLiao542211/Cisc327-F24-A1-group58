@@ -3,8 +3,7 @@ const router = express.Router();
 const User = require('../models/User'); // Make sure the path is correct
 
 // Route to fetch all users
-router.get('/user', async (req, res) => {
-    res.send('Welcome to USER API!')
+router.get('/users', async (req, res) => {
     try {
         const users = await User.find(); // Fetch all users from MongoDB
         res.status(200).json(users); // Respond with the user data
@@ -14,7 +13,7 @@ router.get('/user', async (req, res) => {
 });
 
 // Route to fetch a user by ID
-router.get('/users/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id); // Find user by ID
         if (!user) {
@@ -74,15 +73,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ error: 'Invalid Password' });
         }
 
-        // Assuming you have a method to generate a token
-        // const token = user.generateAuthToken();
-        // // Method to generate an auth token
-        // UserSchema.methods.generateAuthToken = function() {
-        //     const token = jwt.sign({ _id: this._id, email: this.email }, 'your_jwt_secret_key', { expiresIn: '1h' });
-        //     return token;
-        // };
-
-        res.status(200).json({ message: 'Login successful' });
+        res.status(200).json({ message: 'Login successful', userId: user._id }); // Return user ID on successful login
     } catch (error) {
         console.error('Login error:', error); // Log the error details
         res.status(500).json({ error: 'An unexpected error occurred while logging in. Please try again later.' });

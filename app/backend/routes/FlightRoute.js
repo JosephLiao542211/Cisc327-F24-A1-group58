@@ -29,7 +29,8 @@ router.post('/flight', async (req, res) => {
         departureTime: req.body.departureTime,
         arrivalTime: req.body.arrivalTime,
         price: req.body.price,
-        seatConfiguration: req.body.seatConfiguration,
+        seatsAvaliable: req.body.seatsAvaliable,
+        discount: req.body.discount,
         statusId: new mongoose.Types.ObjectId()
     });
 
@@ -37,7 +38,11 @@ router.post('/flight', async (req, res) => {
         const newFlight = await flight.save();
         res.status(201).json(newFlight);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        if (err.code === 11000) { // Duplicate key error code
+            res.status(400).json({ message: 'Flight number already exists must be unique.' });
+        } else {
+            res.status(400).json({ message: err.message });
+        }
     }
 });
 

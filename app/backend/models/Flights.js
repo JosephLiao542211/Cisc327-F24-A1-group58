@@ -30,17 +30,21 @@ const flightSchema = new mongoose.Schema({
         type: Number, // Price in the relevant currency
         required: true
     },
-    seatConfiguration: {
-        type: Map,
-        of: Number, // Example: { 'economy': 150, 'business': 50, 'firstClass': 10 }
+    seatsAvailable: {
+        type: Number, // Number of seats available
         required: true
+    },
+    discount: {
+        type: Number, // Discount as a percentage
+        required: false,
+        min: 0,
+        max: 100
     },
     statusId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'FlightStatus',
         required: true
-    },
-
+    }
 });
 
 const Flight = mongoose.model('Flight', flightSchema);

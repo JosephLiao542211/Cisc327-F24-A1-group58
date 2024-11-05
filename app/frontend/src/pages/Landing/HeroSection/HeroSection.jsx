@@ -1,8 +1,12 @@
 // HeroSection.js
 import React from 'react';
 import './HeroSection.css';
+import { useContext } from 'react';
+import { LoginContext } from '../Landing';
 
 const HeroSection = () => {
+
+  const { userData } = useContext(LoginContext);
   return (
     <section className="hero-section">
       <img 
@@ -13,8 +17,18 @@ const HeroSection = () => {
       />
       <div className="left-column">
         <div className="hero-text">
-          <h1>Hello 👋,</h1>
-          <h1>Joseph</h1>
+          {userData ? (
+            <>
+              <h1>Hello 👋,</h1>
+              <h1>{userData.firstName}</h1>
+            </>
+          ) : (
+            <>
+              <h1>Say Hello 👋</h1>
+              <h1>to Adventure</h1>
+            </>
+          )}
+          
           <h2>Ready to <span>EXPLORE?</span></h2>
           <div className="search-box">
             <input type="text" className="where-input" placeholder="Where do you want to go?" />
