@@ -15,7 +15,7 @@ const UpdateFlight = ({ flight, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onUpdate(flightInfo);
+       
         onClose();
     };
 
