@@ -34,7 +34,7 @@ const AddPlaneForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/plane', planeData);
+            const response = await axios.post('http://localhost:5000/api/planes', planeData);
             console.log('Plane added:', response.data);
             alert('Plane added successfully!');
             setPlaneData({

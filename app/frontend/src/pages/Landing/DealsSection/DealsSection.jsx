@@ -9,7 +9,7 @@ import airportImageCatalogue from '../../../assets/airport_img_catalogue';
 
 const DealsSection = () => {
   const [flights, setFlights] = useState([]);
-  const imgcat = airportImageCatalogue;
+
 
   useEffect(() => {
     const fetchFlights = async () => {
@@ -39,13 +39,12 @@ const DealsSection = () => {
       <div className="deal-cards">
         {flights.length > 0 ? (
           flights.map((flight) => (
-            <FlightCard key={flight.id} id={flight.id} imageURL= {airportImageCatalogue[flight.arrivalAirport].imageURL} description={flight.description} location={airportImageCatalogue[flight.arrivalAirport].location} discount={flight.discount} />
+            <FlightCard key={flight.id} id={flight.id} imageURL={airportImageCatalogue[flight.arrivalAirport].image} description={new Date(flight.departureTime).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} location={airportImageCatalogue[flight.arrivalAirport].location} discount={flight.discount} price={flight.economyPrice} />
           ))
         ) : (
           <div style={{ marginBottom:"30px", width: '100%', height: '100px', backgroundColor: 'orange' }}>
             <div className="no-flights-message">NO DISCOUNTED FLIGHTS </div>
           </div>
-        
         )}
       </div>
 

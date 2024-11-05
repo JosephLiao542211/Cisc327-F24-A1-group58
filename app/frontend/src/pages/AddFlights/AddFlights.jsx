@@ -6,6 +6,7 @@ import AddFlightForm from './AddFlightForm';
 import AllFlights from './AllFlights';
 import AllUsers from './AllUsers';
 import AddPlaneForm from './AddPlaneForm';
+import AllPlanes from './AllPlanes';
 
 /**
  * AddFlights component allows users to add new flights and view existing flights and users.
@@ -111,6 +112,7 @@ const AddFlights = () => {
             <AllFlights flights={flights} openLightbox={openLightbox} />    
             <AllUsers users={users} />
             <AddPlaneForm />
+            <AllPlanes></AllPlanes>
         </div>
     );
 };

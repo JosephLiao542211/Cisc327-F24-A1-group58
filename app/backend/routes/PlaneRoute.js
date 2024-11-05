@@ -2,8 +2,6 @@ const express = require('express');
 const Plane = require('../models/Planes');
 const mongoose = require('mongoose');
 
-
-
 const router = express.Router();
 
 // Get all planes
@@ -16,13 +14,37 @@ router.get('/planes', async (req, res) => {
     }
 });
 
-// Get one plane
-router.get('/planes/:id', getPlane, (req, res) => {
+// Get all plane IDs
+router.get('/planes/ids', async (req, res) => {
+    try {
+        const planes = await Plane.find().select('planeId');
+        const planeIds = planes.map(plane => plane.planeId);
+        res.json(planeIds);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Get a plane by MongoDB ObjectId
+router.get('/planes/:id', getPlaneById, (req, res) => {
     res.json(res.plane);
 });
 
+// Get one plane by custom planeId field
+router.get('/plane/planeId/:planeId', async (req, res) => {
+    try {
+        const plane = await Plane.findOne({ planeId: Number(req.params.planeId) });
+        if (!plane) {
+            return res.status(404).json({ message: 'Cannot find plane' });
+        }
+        res.json(plane);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 // Create a plane
-router.post('/plane', async (req, res) => {
+router.post('/planes', async (req, res) => {
     const plane = new Plane({
         planeId: req.body.planeId,
         modelNumber: req.body.modelNumber,
@@ -41,25 +63,14 @@ router.post('/plane', async (req, res) => {
 });
 
 // Update a plane
-router.patch('/plane/:id', getPlane, async (req, res) => {
-    if (req.body.planeId != null) {
-        res.plane.planeId = req.body.planeId;
-    }
-    if (req.body.modelNumber != null) {
-        res.plane.modelNumber = req.body.modelNumber;
-    }
-    if (req.body.model != null) {
-        res.plane.model = req.body.model;
-    }
-    if (req.body.rows != null) {
-        res.plane.rows = req.body.rows;
-    }
-    if (req.body.columns != null) {
-        res.plane.columns = req.body.columns;
-    }
-    if (req.body.firstclassRange != null) {
-        res.plane.firstclassRange = req.body.firstclassRange;
-    }
+router.patch('/planes/:id', getPlaneById, async (req, res) => {
+    const { planeId, modelNumber, model, rows, columns, firstclassRange } = req.body;
+    if (planeId !== undefined) res.plane.planeId = planeId;
+    if (modelNumber !== undefined) res.plane.modelNumber = modelNumber;
+    if (model !== undefined) res.plane.model = model;
+    if (rows !== undefined) res.plane.rows = rows;
+    if (columns !== undefined) res.plane.columns = columns;
+    if (firstclassRange !== undefined) res.plane.firstclassRange = firstclassRange;
 
     try {
         const updatedPlane = await res.plane.save();
@@ -70,7 +81,7 @@ router.patch('/plane/:id', getPlane, async (req, res) => {
 });
 
 // Delete a plane
-router.delete('/plane/:id', getPlane, async (req, res) => {
+router.delete('/planes/:id', getPlaneById, async (req, res) => {
     try {
         await res.plane.remove();
         res.json({ message: 'Deleted Plane' });
@@ -79,12 +90,12 @@ router.delete('/plane/:id', getPlane, async (req, res) => {
     }
 });
 
-// Middleware to get plane by ID
-async function getPlane(req, res, next) {
+// Middleware to get plane by MongoDB ObjectId
+async function getPlaneById(req, res, next) {
     let plane;
     try {
         plane = await Plane.findById(req.params.id);
-        if (plane == null) {
+        if (!plane) {
             return res.status(404).json({ message: 'Cannot find plane' });
         }
     } catch (err) {

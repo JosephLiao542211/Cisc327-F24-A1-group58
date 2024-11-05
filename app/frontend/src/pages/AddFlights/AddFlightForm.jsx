@@ -1,6 +1,26 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
+    
+
+  
+    const [planeIDs, setPlaneIDs] = useState([]);
+
+    useEffect(() => {
+        const fetchPlaneIDs = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/planes/ids');
+                const data = await response.json();
+                setPlaneIDs(data);
+            } catch (error) {
+                console.error('Error fetching plane IDs:', error);
+            }
+        };
+
+        fetchPlaneIDs();
+    }, []);
+
     return (
         <form className='addflights' onSubmit={handleSubmit}>
             <h1>Add New Flight</h1>
@@ -86,13 +106,19 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
             </div>
             <div>
                 <label>Plane ID:</label>
-                <input
-                    type="text"
+                <select
                     name="planeID"
                     value={flightData.planeID}
                     onChange={handleChange}
                     required
-                />
+                >
+                    <option value="">Select Plane ID</option>
+                    {planeIDs.map((id) => (
+                        <option key={id} value={id}>
+                            {id}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div>
                 <label>Discount (%):</label>

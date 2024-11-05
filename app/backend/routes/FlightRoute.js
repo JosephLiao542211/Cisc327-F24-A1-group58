@@ -21,6 +21,8 @@ router.get('/flight/:id', getFlight, (req, res) => {
 
 // Create a new flight
 router.post('/flight', async (req, res) => {
+    console.log('Received flight data:', req.body);
+
     const flight = new Flight({
         flightNumber: req.body.flightNumber,
         airline: req.body.airline,
@@ -31,9 +33,8 @@ router.post('/flight', async (req, res) => {
         economyPrice: req.body.economyPrice,
         firstclassPrice: req.body.firstclassPrice,
         planeID: req.body.planeID,
-    
         discount: req.body.discount,
-        seatMap: generateSeatMap(req.body.planeID),
+        seatMap: await generateSeatMap(req.body.planeID),
         statusId: new mongoose.Types.ObjectId()
     });
 
@@ -41,8 +42,9 @@ router.post('/flight', async (req, res) => {
         const newFlight = await flight.save();
         res.status(201).json(newFlight);
     } catch (err) {
+        console.error('Error saving flight:', err);
         if (err.code === 11000) { // Duplicate key error code
-            res.status(400).json({ message: 'Flight number already exists must be unique.' });
+            res.status(400).json({ message: 'Flight number must be unique.' });
         } else {
             res.status(400).json({ message: err.message });
         }

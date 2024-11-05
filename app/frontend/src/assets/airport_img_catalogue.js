@@ -9,7 +9,7 @@ const airportImageCatalogue = {
     SFO: { image: 'san_francisco.jpg', location: 'San Francisco, USA' },
     SEA: { image: 'seattle.jpg', location: 'Seattle, USA' },
     MIA: { image: 'miami.jpg', location: 'Miami, USA' },
-    HAN: { image: 'halongay.jpg', location: 'Halongay, Vietnam' },
+    HAN: { image: 'halongbay.jpg', location: 'Halongay, Vietnam' },
     FCO: { image: 'rome.jpg', location: 'Rome, Italy' },
     NRT: { image: 'tokyo.jpg', location: 'Tokyo, Japan' }
 };
