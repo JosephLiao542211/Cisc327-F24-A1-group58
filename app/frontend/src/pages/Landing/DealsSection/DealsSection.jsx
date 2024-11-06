@@ -1,9 +1,30 @@
 // DealsSection.js
 import React from 'react';
+import { useState } from 'react';
 import FlightCard from '../../../components/FlightCard/FlightCard';
 import './DealsSection.css';
+import { useEffect } from 'react';
+import axios from 'axios';
+import airportImageCatalogue from '../../../assets/airport_img_catalogue';
 
-const DealsSection = ({ flights }) => {
+const DealsSection = () => {
+  const [flights, setFlights] = useState([]);
+
+
+  useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/flight');
+        const discountedFlights = response.data.filter(flight => flight.discount > 0);
+        setFlights(discountedFlights);
+      } catch (error) {
+        console.error('Error fetching flights:', error);
+      }
+    };
+
+    fetchFlights();
+  }, []);
+
   return (
     <section className="deals-section">
       <h2>Up to -40% 🎉 Airplane Travel exclusive deals</h2>
@@ -16,22 +37,18 @@ const DealsSection = ({ flights }) => {
       </div>
 
       <div className="deal-cards">
-        <FlightCard id={1} imageURL="rome.jpg" description="Sept 17th" location="Rome, Italy" discount="-20%" />
-        <FlightCard id={2} imageURL="halongbay.jpg" description="Oct 26th" location="Ha Long Bay, Vietnam" discount="-17%" />
-        <FlightCard id={2} imageURL="tokyo.jpg" description="Oct 11th" location="Tokyo, Japan" discount="-50%" />
-      </div>
-
-      {/* <div className="deal-cards">
         {flights.length > 0 ? (
           flights.map((flight) => (
-            <FlightCard key={flight.id} id={flight.id} imageURL={flight.imageURL} description={flight.description} location={flight.location} discount={flight.discount} />
+            <FlightCard key={flight.id} id={flight.id} imageURL={airportImageCatalogue[flight.arrivalAirport].image} description={new Date(flight.departureTime).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} location={airportImageCatalogue[flight.arrivalAirport].location} discount={flight.discount} price={flight.economyPrice} />
           ))
         ) : (
-          <div style={{ width: '100px', height: '100px', backgroundColor: 'purple' }}></div>
+          <div style={{ marginBottom:"30px", width: '100%', height: '100px', backgroundColor: 'orange' }}>
+            <div className="no-flights-message">NO DISCOUNTED FLIGHTS </div>
+          </div>
         )}
-      </div> */}
+      </div>
 
-      <button className="explore-button">Explore More</button>
+      <button className="explore-button">Explore All Flights</button>
     </section>
   );
 };

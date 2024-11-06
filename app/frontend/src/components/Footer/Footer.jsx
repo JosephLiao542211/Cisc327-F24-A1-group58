@@ -2,7 +2,10 @@
 import React from 'react';
 import './Footer.css';
 
+
+
 const Footer = ({ token }) => {
+  const tok = localStorage.getItem('token') || 'generic';
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -14,7 +17,7 @@ const Footer = ({ token }) => {
         </div>
       </div>
       <p className="footer-text">© 2024 Airplane LLC, All rights reserved.</p>
-      <p className="footer-text">{token || 'generic'}</p>
+      <p className="footer-text">{tok || 'generic'}</p>
     </footer>
   );
 };

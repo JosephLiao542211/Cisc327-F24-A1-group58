@@ -42,7 +42,10 @@
     font-size: 1rem;
     align-self: center; /* Vertically aligns the login button */
     transition: all 0.3s ease; /* Add transition for hover effect */
+    display: flex;
+    align-items: center; /* Ensures the button content is vertically centered */
 }
+
 
 
 .nav-login-button:disabled {

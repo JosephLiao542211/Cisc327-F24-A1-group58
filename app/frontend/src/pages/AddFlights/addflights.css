@@ -1,0 +1,86 @@
+.control-panel {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow-y: scroll;
+    height: min-content;
+    min-height: 30vh;
+    max-width: 30%;
+    max-height: 50vh ;
+}
+
+.addflight-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+form.addflights {
+    width: 100%;
+    min-width: 400px;
+    max-width: 400px;
+    flex-shrink: 0;
+}
+
+
+/* Container for the whole control panel */
+
+  /* Title styling */
+  .control-panel h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem; /* Adds space below title */
+    color: #333; /* Dark gray for title */
+  }
+  
+  /* List styling */
+  .control-panel ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    
+  }
+  
+  .control-panel li {
+    padding: 1rem;
+    background-color: #ffffff; /* White background for each item */
+    border-radius: 0.5rem;
+    border: 1px solid #e0e0e0; /* Light border for separation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    margin-bottom: 1rem; /* Space between items */
+  }
+  
+  /* Flex container for airline and price info */
+  .control-panel li .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Airline and Flight Number styling */
+  .control-panel li .text-lg {
+    font-size: 1.125rem; /* Slightly larger font */
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Price styling */
+  .control-panel li .text-blue-600 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #007bff; /* Blue color for price */
+  }
+  
+  /* Subtext styling */
+  .control-panel li .text-gray-500 {
+    color: #666;
+    font-size: 0.875rem; /* Smaller font for subtext */
+    margin-top: 0.5rem; /* Space above subtext */
+  }
+

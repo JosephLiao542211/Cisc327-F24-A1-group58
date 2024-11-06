@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Flight = require('../models/Flights'); // Adjust the path as necessary
-
+const generateSeatMap = require('../middleware/seatmapGenerator');
 const router = express.Router();
 
 // Get all flights
@@ -21,6 +21,8 @@ router.get('/flight/:id', getFlight, (req, res) => {
 
 // Create a new flight
 router.post('/flight', async (req, res) => {
+    console.log('Received flight data:', req.body);
+
     const flight = new Flight({
         flightNumber: req.body.flightNumber,
         airline: req.body.airline,
@@ -28,8 +30,11 @@ router.post('/flight', async (req, res) => {
         arrivalAirport: req.body.arrivalAirport,
         departureTime: req.body.departureTime,
         arrivalTime: req.body.arrivalTime,
-        price: req.body.price,
-        seatConfiguration: req.body.seatConfiguration,
+        economyPrice: req.body.economyPrice,
+        firstclassPrice: req.body.firstclassPrice,
+        planeID: req.body.planeID,
+        discount: req.body.discount,
+        seatMap: await generateSeatMap(req.body.planeID),
         statusId: new mongoose.Types.ObjectId()
     });
 
@@ -37,7 +42,12 @@ router.post('/flight', async (req, res) => {
         const newFlight = await flight.save();
         res.status(201).json(newFlight);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        console.error('Error saving flight:', err);
+        if (err.code === 11000) { // Duplicate key error code
+            res.status(400).json({ message: 'Flight number must be unique.' });
+        } else {
+            res.status(400).json({ message: err.message });
+        }
     }
 });
 
@@ -61,11 +71,21 @@ router.patch('/flight/:id', getFlight, async (req, res) => {
     if (req.body.arrivalTime != null) {
         res.flight.arrivalTime = req.body.arrivalTime;
     }
-    if (req.body.price != null) {
-        res.flight.price = req.body.price;
+    if (req.body.economyPrice != null) {
+        res.flight.economyPrice = req.body.economyPrice;
     }
-    if (req.body.seatConfiguration != null) {
-        res.flight.seatConfiguration = req.body.seatConfiguration;
+    if (req.body.firstclassPrice != null) {
+        res.flight.firstclassPrice = req.body.firstclassPrice;
+    }
+    if (req.body.planeID != null) {
+        res.flight.planeID = req.body.planeID;
+    }
+   
+    if (req.body.discount != null) {
+        res.flight.discount = req.body.discount;
+    }
+    if (req.body.seatMap != null) {
+        res.flight.seatMap = req.body.seatMap;
     }
     if (req.body.statusId != null) {
         res.flight.statusId = req.body.statusId;
@@ -88,6 +108,7 @@ router.delete('/flight/:id', getFlight, async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
 // Bulk insert flights
 router.post('/flight/bulk', async (req, res) => {
     const flightsData = req.body; // Expecting an array of flight objects
@@ -104,8 +125,12 @@ router.post('/flight/bulk', async (req, res) => {
         arrivalAirport: flightData.arrivalAirport,
         departureTime: flightData.departureTime,
         arrivalTime: flightData.arrivalTime,
-        price: flightData.price,
-        seatConfiguration: flightData.seatConfiguration,
+        economyPrice: flightData.economyPrice,
+        firstclassPrice: flightData.firstclassPrice,
+        planeID: flightData.planeID,
+      
+        discount: flightData.discount,
+        seatMap: flightData.seatMap,
         statusId: new mongoose.Types.ObjectId()
     }));
 
@@ -116,7 +141,6 @@ router.post('/flight/bulk', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
-
 
 // Middleware to get flight by ID
 async function getFlight(req, res, next) {
