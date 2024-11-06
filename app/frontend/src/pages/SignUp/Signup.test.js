@@ -28,6 +28,23 @@ describe('SignUp Component', () => {
         expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
     });
 
+    test('Register button is enabled when terms and conditions checkbox is checked', () => {
+        render(
+            <BrowserRouter>
+                <SignUp />
+            </BrowserRouter>
+        );
+    
+        const registerButton = screen.getByRole('button', { name: /Register/i });
+        const termsCheckbox = screen.getByRole('checkbox');
+
+        expect(registerButton).toBeDisabled();
+        fireEvent.click(termsCheckbox);
+        expect(registerButton).toBeEnabled();
+        fireEvent.click(termsCheckbox);
+        expect(registerButton).toBeDisabled();
+    });
+
     test('should register a new user successfully', async () => {
         fetch.mockResolvedValueOnce({
             ok: true,

@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'; // for extended matchers like toBeInTheDocument
+import '@testing-library/jest-dom';
 import HeroSection from './HeroSection';
 
 describe('HeroSection Component', () => {
   test('renders Airplane header logo correctly', () => {
-    // Add a test for the logo if it's part of the header in the HeroSection component
+    // Test for the logo if it's part of the header in the HeroSection component
     const { container } = render(<HeroSection />);
     const logo = container.querySelector('img[alt="Airplane"]');
     expect(logo).toBeInTheDocument();
