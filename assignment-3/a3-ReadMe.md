@@ -53,8 +53,8 @@ This will start Jest in watch mode, allowing you to run all tests automatically
    ```
 Replace <file-path> with the relative path to the test file you want to run.
 
-2 Unit Test screenshots were submitted because the first is etsts done before the backend overhaul and 
-the 2nd is after something has just changed the outcome of our tests
+2 Unit Test screenshots were submitted because the first named UnitTest_Prev is tests done before the backend overhaul and the 2nd is after something has just 
+changed the outcome of our tests
 
-A total of 17 tests are running although we were having greater success and due to some change in the 
-backend all of the tests are failing except 2, this will continue to be worked on for the next submittion
+The same total number of tests are running although we were having greater success and due to our changes we have been making in the backend
+backend all of the tests are failing except 2, this will be fixed for the next submission but does show the tests are working
