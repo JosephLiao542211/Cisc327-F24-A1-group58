@@ -48,7 +48,7 @@ const DealsSection = () => {
         )}
       </div>
 
-      <button className="explore-button">Explore All Flights</button>
+      <button className="explore-button" onClick={() => window.location.href = '/explore'}>Explore All Flights</button>
     </section>
   );
 };

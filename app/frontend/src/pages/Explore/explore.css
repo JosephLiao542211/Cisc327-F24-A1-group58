@@ -1,0 +1,60 @@
+.explore-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+.explore-page .exleft-column {
+    flex: 8.5;
+    background-color: #f0f0f0; /* Optional: Add background color for visualization */
+}
+
+.explore-page .exright-column {
+    flex: 1.5;
+    background-color: #d0d0d0; /* Optional: Add background color for visualization */
+}
+.explore-page .explore-catalogue {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+/* .explore-page .explore-catalogue .flightcard {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+.explore-page .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.explore-page .filters input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.explore-page .filters input[type="date"],
+.explore-page .filters input[type="number"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.discountcheckbox{
+    display: flex;
+    margin-bottom: 10%
+}
+.datesearch{
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    margin-bottom: 10%;
+}

@@ -59,12 +59,12 @@ const Landing = ({ token }) => {
         (<h1>{userData.firstName}</h1>)
 } */}
         <LoginContext.Provider value={{userData,setUserData}} >
-            <Header />
+           
             <HeroSection />
             <DealsSection flights={flights} />
         </LoginContext.Provider>
         </div>
-      <Footer token={token} />
+      
     </div>
     
   );

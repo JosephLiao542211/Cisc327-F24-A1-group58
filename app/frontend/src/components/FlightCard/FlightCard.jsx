@@ -28,12 +28,13 @@ const FlightCard = ({ id, imageURL: propImageURL, description: propDescription, 
             <div className="flight-card-overlay">
                 <p>{description}</p>
                 <h1>{location}</h1>
-           
                 <p>Starting at ${price}</p>
             </div>
-            <div className="discount-overlay">
-                <h1>{discount}%</h1>
-            </div>
+            {discount !== 'No discount available' && (
+                <div className="discount-overlay">
+                    <h1>{discount}%</h1>
+                </div>
+            )}
         </div>
     );
 };
