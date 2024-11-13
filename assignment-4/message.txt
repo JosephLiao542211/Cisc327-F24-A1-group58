@@ -1,0 +1,28 @@
+File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                    
+----------------------------|---------|----------|---------|---------|--------------------------------------
+All files                   |   45.73 |    46.29 |      44 |   46.09 |                                      
+ pages                      |    2.94 |        0 |       0 |    3.03 |                                      
+  Test.jsx                  |    2.94 |        0 |       0 |    3.03 | 5-76                                 
+ pages/AddFlights           |   46.78 |    15.38 |   45.16 |   46.78 |                                      
+  AddFlightForm.jsx         |   66.66 |      100 |      75 |   66.66 | 14-17,117                            
+  AddFlights.jsx            |    52.5 |    14.28 |   55.55 |    52.5 | 25-27,39-41,63-64,71-72,76-77,82-103 
+  AddPlaneForm.jsx          |      30 |      100 |   16.66 |      30 | 16-17,25-27,35-49,118-124            
+  AllFlights.jsx            |      50 |      100 |   33.33 |      50 | 10-31                                
+  AllPlanes.jsx             |   52.38 |    16.66 |      75 |   52.38 | 12-20,31-40                          
+  AllUsers.jsx              |   66.66 |      100 |      50 |   66.66 | 10                                   
+  UpdateFlight.jsx          |   11.11 |      100 |       0 |   11.11 | 6-22                                 
+ pages/Explore              |   94.11 |    86.95 |   83.33 |   94.11 |                                      
+  Explore.jsx               |   94.11 |    86.95 |   83.33 |   94.11 | 56-64                                
+ pages/Landing              |    87.5 |       50 |     100 |    87.5 |                                      
+  Landing.jsx               |    87.5 |       50 |     100 |    87.5 | 26-27,47                             
+ pages/Landing/DealsSection |    7.14 |        0 |       0 |    7.69 |                                      
+  DealsSection.jsx          |    7.14 |        0 |       0 |    7.69 | 11-51                                
+ pages/Landing/HeroSection  |     100 |       50 |     100 |     100 |                                      
+  HeroSection.jsx           |     100 |       50 |     100 |     100 | 20                                   
+ pages/Login                |   39.13 |    16.66 |      75 |   39.13 |                                      
+  Login.jsx                 |   39.13 |    16.66 |      75 |   39.13 | 14-40                                
+ pages/SignUp               |       0 |        0 |       0 |       0 |                                      
+  SignUp.jsx                |       0 |        0 |       0 |       0 | 6-102                                
+----------------------------|---------|----------|---------|---------|--------------------------------------
+Test Suites: 6 failed, 2 passed, 8 total
+Tests:       12 failed, 12 passed, 24 total
