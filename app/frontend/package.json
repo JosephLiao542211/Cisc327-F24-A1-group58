@@ -43,7 +43,8 @@
     "@testing-library/react": "^16.0.1",
     "axios-mock-adapter": "^2.1.0",
     "babel-jest": "^29.7.0",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "jest-fetch-mock": "^3.0.3"
   },
   "jest": {
     "transform": {
