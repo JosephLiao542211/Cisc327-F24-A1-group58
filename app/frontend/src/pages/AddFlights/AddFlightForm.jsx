@@ -25,8 +25,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
         <form className='addflights' onSubmit={handleSubmit}>
             <h1>Add New Flight</h1>
             <div>
-                <label>Flight Number:</label>
+                <label htmlFor='flightNumber'>Flight Number:</label>
                 <input
+                    id='flightNumber'
                     type="text"
                     name="flightNumber"
                     value={flightData.flightNumber}
@@ -35,8 +36,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>Airline:</label>
+                <label htmlFor='airline'>Airline:</label>
                 <input
+                    id='airline'
                     type="text"
                     name="airline"
                     value={flightData.airline}
@@ -45,8 +47,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>Departure Airport:</label>
+                <label htmlFor='departureAirport'>Departure Airport:</label>
                 <input
+                    id='departureAirport'
                     type="text"
                     name="departureAirport"
                     value={flightData.departureAirport.toUpperCase()}
@@ -55,8 +58,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>Arrival Airport:</label>
+                <label htmlFor='arrivalAirport'>Arrival Airport:</label>
                 <input
+                    id='arrivalAirport'
                     type="text"
                     name="arrivalAirport"
                     value={flightData.arrivalAirport.toUpperCase()}
@@ -65,8 +69,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>Departure Time:</label>
+                <label htmlFor='departureTime'>Departure Time:</label>
                 <input
+                    id='departureTime'
                     type="datetime-local"
                     name="departureTime"
                     value={flightData.departureTime}
@@ -75,8 +80,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>Arrival Time:</label>
+                <label htmlFor='arrivalTime'>Arrival Time:</label>
                 <input
+                    id='arrivalTime'
                     type="datetime-local"
                     name="arrivalTime"
                     value={flightData.arrivalTime}
@@ -85,8 +91,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>Economy Price:</label>
+                <label htmlFor='economyPrice'>Economy Price:</label>
                 <input
+                    id='economyPrice'
                     type="number"
                     name="economyPrice"
                     value={flightData.economyPrice}
@@ -95,8 +102,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>First Class Price:</label>
+                <label htmlFor='firstclassPrice'>First Class Price:</label>
                 <input
+                    id='firstclassPrice'
                     type="number"
                     name="firstclassPrice"
                     value={flightData.firstclassPrice}
@@ -105,8 +113,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 />
             </div>
             <div>
-                <label>Plane ID:</label>
+                <label htmlFor='planeID'>Plane ID:</label>
                 <select
+                    id='planeID'
                     name="planeID"
                     value={flightData.planeID}
                     onChange={handleChange}
@@ -121,8 +130,9 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                 </select>
             </div>
             <div>
-                <label>Discount (%):</label>
+                <label htmlFor='discount'>Discount (%):</label>
                 <input
+                    id='discount'
                     type="number"
                     name="discount"
                     value={flightData.discount}

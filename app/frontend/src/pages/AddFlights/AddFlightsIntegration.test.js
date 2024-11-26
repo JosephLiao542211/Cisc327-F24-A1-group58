@@ -59,7 +59,7 @@ describe('AddFlights Integration Test', () => {
     render(<AddFlights />);
 
     // Wait for plane IDs to be loaded
-    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(2));
 
     // Fill out the form
     userEvent.type(screen.getByLabelText(/Flight Number:/i), '1234');
@@ -122,7 +122,7 @@ describe('AddFlights Integration Test', () => {
     render(<AddFlights />);
 
     // Wait for plane IDs to be loaded
-    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(2));
 
     // Fill out the form with a duplicate flight number
     userEvent.type(screen.getByLabelText(/Flight Number:/i), '1234');
