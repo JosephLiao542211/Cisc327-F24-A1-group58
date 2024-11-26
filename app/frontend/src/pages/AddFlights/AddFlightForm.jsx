@@ -75,7 +75,7 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                     type="datetime-local"
                     name="departureTime"
                     value={flightData.departureTime}
-                    onChange={handleChange}
+                    onInput={handleChange}
                     required
                 />
             </div>
@@ -86,7 +86,7 @@ const AddFlightForm = ({ flightData, handleChange, handleSubmit }) => {
                     type="datetime-local"
                     name="arrivalTime"
                     value={flightData.arrivalTime}
-                    onChange={handleChange}
+                    onInput={handleChange}
                     required
                 />
             </div>
