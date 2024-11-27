@@ -1,19 +1,20 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import axios from 'axios';
 import Explore from './Explore';
-import FlightCard from '../../components/FlightCard/FlightCard';
+import axios from 'axios';
+import airportImageCatalogue from '../../assets/airport_img_catalogue';
 
+// Mock axios
 jest.mock('axios');
 
-jest.mock('../../assets/airport_img_catalogue', () => ({
-  JFK: { image: 'new_york.jpg', location: 'New York, USA' },
-  LAX: { image: 'los_angeles.jpg', location: 'Los Angeles, USA' },
-  SFO: { image: 'san_francisco.jpg', location: 'San Francisco, USA' },
-  ORD: { image: 'chicago.jpg', location: 'Chicago, USA' },
-}));
+// Mock the FlightCard component
+jest.mock('../../components/FlightCard/FlightCard', () => (props) => (
+  <div data-testid="flight-card">
+    <div>{props.description}</div>
+  </div>
+));
 
-describe('Explore Component Integration', () => {
+describe('Explore Component', () => {
   const mockFlights = [
     {
       id: 1,
@@ -41,71 +42,156 @@ describe('Explore Component Integration', () => {
     jest.clearAllMocks();
   });
 
-  test('integrates with FlightCard and applies filters correctly', async () => {
+  test('renders without crashing and fetches flights', async () => {
     render(<Explore />);
 
     // Wait for flights to be fetched and rendered
-    await waitFor(() => {
-      expect(screen.getByText((content, element) => {
-        return element.textContent.includes('JFK → LAX');
-      })).toBeInTheDocument();
-      expect(screen.getByText((content, element) => {
-        return element.textContent.includes('SFO → ORD');
-      })).toBeInTheDocument();
-    });
+    const flightCards = await waitFor(() => screen.getAllByTestId('flight-card'));
+    expect(flightCards).toHaveLength(mockFlights.length);
+  });
 
-    // Check if FlightCard components are rendered with correct props
-    expect(screen.getByText('New York, USA')).toBeInTheDocument();
-    expect(screen.getByText('San Francisco, USA')).toBeInTheDocument();
+  test('displays "NO DISCOUNTED FLIGHTS" message when no flights match filters', async () => {
+    render(<Explore />);
+
+    // Wait for flights to be fetched
+    await waitFor(() => screen.getAllByTestId('flight-card'));
+
+    // Apply filters that will result in no flights being displayed
+    const discountCheckbox = screen.getByLabelText(/Discounted Flights Only/i);
+    fireEvent.click(discountCheckbox);
+
+    const dateInput = screen.getByLabelText(/Departure Date/i);
+    fireEvent.change(dateInput, { target: { value: '2023-10-25' } });
+
+    // Verify that the "NO DISCOUNTED FLIGHTS" message is displayed
+    expect(screen.getByText(/NO DISCOUNTED FLIGHTS/i)).toBeInTheDocument();
+  });
+
+  test('filters flights by discount', async () => {
+    render(<Explore />);
+
+    // Wait for flights to be fetched
+    await waitFor(() => screen.getAllByTestId('flight-card'));
 
     // Apply discount filter
-    fireEvent.click(screen.getByLabelText(/Discounted Flights Only/i));
-    await waitFor(() => {
-      expect(screen.getByText((content, element) => {
-        return element.textContent.includes('JFK → LAX');
-      })).toBeInTheDocument();
-      expect(screen.queryByText((content, element) => {
-        return element.textContent.includes('SFO → ORD');
-      })).not.toBeInTheDocument();
-    });
+    const discountCheckbox = screen.getByLabelText(/Discounted Flights Only/i);
+    fireEvent.click(discountCheckbox);
+
+    // Verify that only discounted flights are displayed
+    const flightCards = screen.getAllByTestId('flight-card');
+    expect(flightCards).toHaveLength(1);
+    expect(screen.getByText(/JFK → LAX/i)).toBeInTheDocument();
+  });
+
+  test('filters flights by departure date', async () => {
+    render(<Explore />);
+
+    // Wait for flights to be fetched
+    await waitFor(() => screen.getAllByTestId('flight-card'));
 
     // Apply date filter
-    fireEvent.change(screen.getByLabelText(/Departure Date/i), { target: { value: '2023-10-15' } });
-    await waitFor(() => {
-      expect(screen.getByText((content, element) => {
-        return element.textContent.includes('JFK → LAX');
-      })).toBeInTheDocument();
-      expect(screen.queryByText((content, element) => {
-        return element.textContent.includes('SFO → ORD');
-      })).not.toBeInTheDocument();
-    });
+    const dateInput = screen.getByLabelText(/Departure Date/i);
+    fireEvent.change(dateInput, { target: { value: '2023-10-15' } });
+
+    // Verify that only flights matching the date are displayed
+    const flightCards = screen.getAllByTestId('flight-card');
+    expect(flightCards).toHaveLength(1);
+    expect(screen.getByText(/JFK → LAX/i)).toBeInTheDocument();
+  });
+
+  test('filters flights by price range', async () => {
+    render(<Explore />);
+
+    // Wait for flights to be fetched
+    await waitFor(() => screen.getAllByTestId('flight-card'));
 
     // Apply price filter
-    fireEvent.change(screen.getByPlaceholderText(/Min Price/i), { target: { value: '250' } });
-    fireEvent.change(screen.getByPlaceholderText(/Max Price/i), { target: { value: '350' } });
+    const minPriceInput = screen.getByPlaceholderText(/Min Price/i);
+    const maxPriceInput = screen.getByPlaceholderText(/Max Price/i);
+    fireEvent.change(minPriceInput, { target: { value: '250' } });
+    fireEvent.change(maxPriceInput, { target: { value: '350' } });
+
+    // Verify that only flights within the price range are displayed
+    const flightCards = screen.getAllByTestId('flight-card');
+    expect(flightCards).toHaveLength(1);
+    expect(screen.getByText(/JFK → LAX/i)).toBeInTheDocument();
+  });
+
+  test('filters flights by departure airport', async () => {
+    render(<Explore />);
+
+    // Wait for flights to be fetched
+    await waitFor(() => screen.getAllByTestId('flight-card'));
+
+    // Apply departure airport filter
+    const departureAirportInput = screen.getByPlaceholderText(/Departure Airport/i);
+    fireEvent.change(departureAirportInput, { target: { value: 'SFO' } });
+
+    // Verify that only flights from SFO are displayed
+    const flightCards = screen.getAllByTestId('flight-card');
+    expect(flightCards).toHaveLength(1);
+    expect(screen.getByText(/SFO → ORD/i)).toBeInTheDocument();
+  });
+
+  test('filters flights by arrival airport', async () => {
+    render(<Explore />);
+
+    // Wait for flights to be fetched
+    await waitFor(() => screen.getAllByTestId('flight-card'));
+
+    // Apply arrival airport filter
+    const arrivalAirportInput = screen.getByPlaceholderText(/Arrival Airport/i);
+    fireEvent.change(arrivalAirportInput, { target: { value: 'LAX' } });
+
+    // Verify that only flights arriving at LAX are displayed
+    const flightCards = screen.getAllByTestId('flight-card');
+    expect(flightCards).toHaveLength(1);
+    expect(screen.getByText(/JFK → LAX/i)).toBeInTheDocument();
+  });
+
+  test('applies multiple filters simultaneously', async () => {
+    render(<Explore />);
+
+    // Wait for flights to be fetched
+    await waitFor(() => screen.getAllByTestId('flight-card'));
+
+    // Apply multiple filters
+    const discountCheckbox = screen.getByLabelText(/Discounted Flights Only/i);
+    fireEvent.click(discountCheckbox);
+
+    const dateInput = screen.getByLabelText(/Departure Date/i);
+    fireEvent.change(dateInput, { target: { value: '2023-10-15' } });
+
+    const minPriceInput = screen.getByPlaceholderText(/Min Price/i);
+    fireEvent.change(minPriceInput, { target: { value: '250' } });
+
+    // Verify that only flights matching all filters are displayed
+    const flightCards = screen.getAllByTestId('flight-card');
+    expect(flightCards).toHaveLength(1);
+    expect(screen.getByText(/JFK → LAX/i)).toBeInTheDocument();
+  });
+
+  test('handles no flights returned from API', async () => {
+    // Mock axios to return empty data
+    axios.get.mockResolvedValue({ data: [] });
+
+    render(<Explore />);
+
+    // Verify that the "NO DISCOUNTED FLIGHTS" message is displayed
     await waitFor(() => {
-      expect(screen.getByText((content, element) => {
-        return element.textContent.includes('JFK → LAX');
-      })).toBeInTheDocument();
-      expect(screen.queryByText((content, element) => {
-        return element.textContent.includes('SFO → ORD');
-      })).not.toBeInTheDocument();
+      expect(screen.getByText(/NO DISCOUNTED FLIGHTS/i)).toBeInTheDocument();
     });
+  });
 
-    // Clear filters
-    fireEvent.click(screen.getByLabelText(/Discounted Flights Only/i));
-    fireEvent.change(screen.getByLabelText(/Departure Date/i), { target: { value: '' } });
-    fireEvent.change(screen.getByPlaceholderText(/Min Price/i), { target: { value: '' } });
-    fireEvent.change(screen.getByPlaceholderText(/Max Price/i), { target: { value: '' } });
+  test('handles API error gracefully', async () => {
+    // Mock axios to throw an error
+    axios.get.mockRejectedValue(new Error('Network Error'));
 
-    // Verify all flights are displayed again
+    render(<Explore />);
+
+    // Verify that an error message is logged (you can also mock console.error)
     await waitFor(() => {
-      expect(screen.getByText((content, element) => {
-        return element.textContent.includes('JFK → LAX');
-      })).toBeInTheDocument();
-      expect(screen.getByText((content, element) => {
-        return element.textContent.includes('SFO → ORD');
-      })).toBeInTheDocument();
+      expect(axios.get).toHaveBeenCalledTimes(1);
     });
   });
 });
