@@ -142,8 +142,5 @@ describe('AddFlights Integration Test', () => {
 
     // Assert that the success alert was shown
     expect(window.alert).toHaveBeenCalledWith('Flight added successfully!');
-
-    // Optionally, you can check if the form was reset
-    //expect(screen.getByLabelText(/Flight Number:/i)).toHaveValue('');
   });
 });
