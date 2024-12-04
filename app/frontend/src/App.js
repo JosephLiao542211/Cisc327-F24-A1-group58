@@ -10,7 +10,6 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 function App() {
-    
     return (
         <Router>
             <div>
@@ -22,7 +21,10 @@ function App() {
                     <Route path="/login" element={<Login></Login>} />
                     <Route path="/" element={<Landing></Landing>} />
                     <Route path="/:userId" element={<Landing></Landing>} />
-                    <Route path="/addflights" element={<AddFlights></AddFlights>} />
+                    <Route
+                        path="/addflights"
+                        element={<AddFlights></AddFlights>}
+                    />
                 </Routes>
                 <Footer></Footer>
             </div>

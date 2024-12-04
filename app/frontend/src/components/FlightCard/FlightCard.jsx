@@ -2,11 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FlightCard.css'; // Make sure to create a CSS file for styling
 
-const FlightCard = ({ id, imageURL: propImageURL, description: propDescription, location: propLocation, discount: propDiscount, price: propPrice }) => {
-    const [imageURL, setImageURL] = useState(propImageURL || 'placeholder-image-url');
-    const [description, setDescription] = useState(propDescription || 'No description available');
-    const [location, setLocation] = useState(propLocation || 'Unknown location');
-    const [discount, setDiscount] = useState(propDiscount || 'No discount available');
+const FlightCard = ({
+    id,
+    imageURL: propImageURL,
+    description: propDescription,
+    location: propLocation,
+    discount: propDiscount,
+    price: propPrice,
+}) => {
+    const [imageURL, setImageURL] = useState(
+        propImageURL || 'placeholder-image-url'
+    );
+    const [description, setDescription] = useState(
+        propDescription || 'No description available'
+    );
+    const [location, setLocation] = useState(
+        propLocation || 'Unknown location'
+    );
+    const [discount, setDiscount] = useState(
+        propDiscount || 'No discount available'
+    );
     const [price, setPrice] = useState(propPrice || 'No price available');
     const navigate = useNavigate();
 
@@ -19,6 +34,7 @@ const FlightCard = ({ id, imageURL: propImageURL, description: propDescription, 
     }, [propImageURL, propDescription, propLocation, propDiscount, propPrice]);
 
     const handleClick = () => {
+        console.log({ id });
         navigate(`/flight/${id}`);
     };
 
