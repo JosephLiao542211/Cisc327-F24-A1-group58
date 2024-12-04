@@ -1,0 +1,34 @@
+PS C:\Users\josep\Projects\Cisc327-F24-A1-group58\app> & c:/Users/josep/Projects/Cisc327-F24-A1-group58/venv/Scripts/python.exe c:/Users/josep/Projects/Cisc327-F24-A1-group58/app/assignment-6/e2e_test.py
+
+DevTools listening on ws://127.0.0.1:49989/devtools/browser/793f1547-ad80-4279-94c0-0694e8371210
+Opened application homepage.
+Navigated to the 'Register' page.
+Filled in the registration form.
+Submitted the registration form.
+Registration alert: Error registering user
+Alert accepted successfully.
+User is already registered.
+Filled in the login form.
+Submitted the login form.
+Login alert: Login successful
+Login alert accepted successfully.
+User data validated successfully. LOGIN FULLY SUCCESSFUL
+Discounted flights are available.
+Flight location: Tokyo, Japan Discount: 10%
+Flight location: Rome, Italy Discount: 30%
+Flight location: Halongay, Vietnam Discount: 15%
+Navigated to the 'Explore All Flights' page.
+Catalogue, location: Tokyo, Japan Discount: 10%
+Catalogue, location: Rome, Italy Discount: 30%
+Catalogue, location: Halongay, Vietnam Discount: 15%
+Catalogue, location: Denver, USA Discount: No discount
+Catalogue, location: Chicago, USA Discount: No discount
+Catalogue, location: Atlanta, USA Discount: No discount
+Entered minimum price for filtering.
+Applied the price filter.
+Location:Rome, Italy Filtered flight price: Starting at $500
+Location:Halongay, Vietnam Filtered flight price: Starting at $729
+All tests executed successfully.
+Created TensorFlow Lite XNNPACK delegate for CPU.
+Browser closed.
+PS C:\Users\josep\Projects\Cisc327-F24-A1-group58\app> 
