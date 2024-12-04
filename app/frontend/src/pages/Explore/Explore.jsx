@@ -119,6 +119,7 @@ const Explore = () => {
                     <input
                         type="number"
                         placeholder="Min Price"
+                        name='minPrice'
                         value={minPrice}
                         onChange={(e) => setMinPrice(e.target.value)}
                     />

@@ -20,7 +20,7 @@ const HeroSection = () => {
           {userData ? (
             <>
               <h1>Hello 👋,</h1>
-              <h1>{userData.firstName}</h1>
+              <h1 className="userfirstname">{userData.firstName}</h1>
             </>
           ) : (
             <>

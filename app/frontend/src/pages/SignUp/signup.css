@@ -10,6 +10,9 @@
 }
 .signup-body {
     margin: 0;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    min-height: max-content;
     font-family: 'Poppins', Arial, sans-serif;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     height: 100vh;
